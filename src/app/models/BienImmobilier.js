@@ -94,7 +94,7 @@ const BienImmobilierSchema = mongoose.model(
       // required: true
     },
     options: {
-      type: Array
+    type: Array
 
       // required: true
     },
