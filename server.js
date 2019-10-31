@@ -38,6 +38,7 @@ app.use(passport.initialize());
 
 // global error handler
 app.use(errorHandler);
+app.use(express.static('public'));
 
 app.use(bodyParser.json());
 app.set("secretKey", "tokentest");
