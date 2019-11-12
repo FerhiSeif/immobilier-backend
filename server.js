@@ -24,6 +24,9 @@ var etudeProjet = require("./src/app/controllers/etudeProjet");
 var autre = require("./src/app/controllers/autre");
 var bienImmobilier = require("./src/app/controllers/bienImmobilier");
 var rechercheAvancee = require("./src/app/controllers/rechercheAvancee");
+var negocierPrix = require("./src/app/controllers/negocierPrix");
+var estimation = require("./src/app/controllers/estimation");
+
 const errorHandler = require("./src/app/_helpers/error-handler");
 // create app
 var app = express();
@@ -55,13 +58,16 @@ app.use("/etudeProjets", etudeProjet);
 app.use("/autres", autre);
 app.use("/bienImmobiliers", bienImmobilier);
 app.use("/rechercheAvancees", rechercheAvancee);
+app.use("/negocierPrix", negocierPrix);
+app.use("/estimations", estimation);
+
 //********
 
 // Connection URL
 mongoose
-  .connect("mongodb://localhost:27017/mydb", { useNewUrlParser: true })
-  .then(() => console.log("MongoDB connect..."))
-  .catch(err => console.log("Error:", err.message));
+    .connect("mongodb://localhost:27017/mydb", { useNewUrlParser: true })
+    .then(() => console.log("MongoDB connect..."))
+    .catch(err => console.log("Error:", err.message));
 
 // mongoose.connect(
 //   "mongodb://localhost:27017/mydb",
@@ -82,5 +88,5 @@ mongoose
 // });
 
 app.listen(8080, function() {
-  console.log("server connected on port 8080");
+    console.log("server connected on port 8080");
 });
