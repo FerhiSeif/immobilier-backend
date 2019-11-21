@@ -2,6 +2,9 @@ var express = require("express");
 var mongoose = require("mongoose");
 const cors = require("cors");
 var bodyParser = require("body-parser");
+const errorHandler = require("./src/app/_helpers/error-handler");
+// create app
+var app = express();
 //The dotenv package is used to load environmental variables from a .env file into process.env Notice we are referencing a variables.env file at the top of the code. This is where we’ll store all our app credentials.
 // require('dotenv').config({ path: 'variables.env' });
 // const processMessage = require('../frontOffice/react_test_project/frontend/src/components/reactBot/process-message');
@@ -26,10 +29,10 @@ var bienImmobilier = require("./src/app/controllers/bienImmobilier");
 var rechercheAvancee = require("./src/app/controllers/rechercheAvancee");
 var negocierPrix = require("./src/app/controllers/negocierPrix");
 var estimation = require("./src/app/controllers/estimation");
+var demandeVisite = require("./src/app/controllers/visites");
+var demandeAchat = require("./src/app/controllers/demandeAchat");
+var demandeLocation = require("./src/app/controllers/demandeLocation");
 
-const errorHandler = require("./src/app/_helpers/error-handler");
-// create app
-var app = express();
 
 //CORS vous permet de configurer la sécurité de l'API Web. Il s'agit de permettre à d'autres domaines de faire des requêtes contre votre API Web. Par exemple, si vous aviez votre API Web sur un serveur et votre application Web sur un autre, vous pouvez configurer CORS dans votre API Web pour permettre à votre application Web d'appeler votre API Web.
 
@@ -60,6 +63,9 @@ app.use("/bienImmobiliers", bienImmobilier);
 app.use("/rechercheAvancees", rechercheAvancee);
 app.use("/negocierPrix", negocierPrix);
 app.use("/estimations", estimation);
+app.use("/demandeVisites", demandeVisite);
+app.use("/demandeAchats", demandeAchat);
+app.use("/demandeLocations", demandeLocation);
 
 //********
 
@@ -68,7 +74,9 @@ mongoose
     .connect("mongodb://localhost:27017/mydb", { useNewUrlParser: true })
     .then(() => console.log("MongoDB connect..."))
     .catch(err => console.log("Error:", err.message));
-
+app.listen(8080, function() {
+    console.log("server connected on port 8080");
+});
 // mongoose.connect(
 //   "mongodb://localhost:27017/mydb",
 //   { useNewUrlParser },
@@ -86,7 +94,3 @@ mongoose
 //   const { message } = req.body;
 //   console.log(message);
 // });
-
-app.listen(8080, function() {
-    console.log("server connected on port 8080");
-});
