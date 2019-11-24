@@ -29,8 +29,28 @@ const DemandeLocationSchema = new Schema({
     },
     prix: {
         type: String
-    }
+    },
+    nom: {
+        type: String,
+        trim: true,
 
+    },
+
+    tel: {
+        type: String,
+        trim: true
+    },
+
+    email: {
+        type: String,
+        trim: true,
+
+    },
+    message: {
+        type: String,
+
+
+    },
 
 });
 // use schema to create mongooses module
