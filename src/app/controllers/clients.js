@@ -186,7 +186,23 @@ router.get("/all", function(req, res) {
       }
     });
 });
-//***************************************************
+//*********************GET ALL AGENTS*********************
+router.get("/agents/all", function(req, res) {
+  User.find({ role: "agent" })
+    // .populate("role", "nom")
+    // .populate("reclamation")
+    .exec(function(err, result) {
+      if (err) {
+        res.send(err);
+      } else {
+        res.json({
+          status: "succes",
+          msg: "All agents",
+          data: { result: result }
+        });
+      }
+    });
+});
 
 //***************************************************
 // router.get('/logout', function(req, res){

@@ -13,14 +13,8 @@ Schema = mongoose.Schema;
 const UserSchema = new mongoose.Schema({
     role: {
       type: String,
-      enum: [
-        "agent",
-        "chefAgence",
-        "client",
-        "clientQuiPossedeBien",
-        "clientQuiVeutBien",
-        "visiteur"
-      ]
+    enum: ["agent", "chefAgence", "client", "visiteur"]
+      
       // required: true
     },
     activated: {

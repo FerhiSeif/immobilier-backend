@@ -1,0 +1,136 @@
+Arguments: 
+  C:\Program Files\nodejs\node.exe C:\Program Files (x86)\Yarn\bin\yarn.js install
+
+PATH: 
+  D:\cmder\bin;D:\cmder\vendor\conemu-maximus5\ConEmu\Scripts;D:\cmder\vendor\conemu-maximus5;D:\cmder\vendor\conemu-maximus5\ConEmu;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Program Files (x86)\NVIDIA Corporation\PhysX\Common;C:\Program Files\Git\cmd;C:\Program Files (x86)\Yarn\bin\;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;C:\WINDOWS\System32\OpenSSH\;C:\Program Files\Microsoft VS Code\bin;C:\Program Files\nodejs\;C:\Users\ASUS\AppData\Local\Microsoft\WindowsApps;C:\Program Files\nodejs\node_modules\npm\bin;C:\Program Files\Git\bin;C:\Program Files\MongoDB\Server\3.6\bin;C:\Program Files\Microsoft VS Code\bin;D:\cmder\bin;C:\Users\ASUS\AppData\Local\Yarn\bin;C:\Users\ASUS\AppData\Roaming\npm;C:\Program Files\Git\usr\bin;C:\Program Files\Git\usr\share\vim\vim74;D:\cmder\
+
+Yarn version: 
+  1.5.1
+
+Node version: 
+  10.16.3
+
+Platform: 
+  win32 x64
+
+npm manifest: 
+  {
+    "name": "AgenceVirtuelle",
+    "version": "1.0.0",
+    "description": "",
+    "main": "index.js",
+    "scripts": {
+      "client-install": "npm install --prefix client ",
+      "test": "echo \"Error: no test specified\" && exit 1",
+      "start": "node server.js",
+      "server": "nodemon server.js",
+      "client": "npm start --prefix client",
+      "dev": "concurrently \"npm run server\" \"npm run client\""
+    },
+    "keywords": [],
+    "author": "",
+    "license": "ISC",
+    "dependencies": {
+      "accesscontrol": "^2.2.1",
+      "async": "^3.1.0",
+      "avatar": "^0.1.0",
+      "bcrypt": "^3.0.6",
+      "bcryptjs": "^2.4.3",
+      "body-parser": "^1.19.0",
+      "config": "^3.2.2",
+      "connect": "^3.7.0",
+      "cors": "^2.8.5",
+      "cors-prefetch-middleware": "^1.0.0",
+      "crypto": "^1.0.1",
+      "dialogflow": "^0.10.3",
+      "dotenv": "^8.1.0",
+      "errorhandler": "^1.5.1",
+      "express": "^4.17.1",
+      "express-jwt": "^5.3.1",
+      "fs": "0.0.1-security",
+      "googleapis": "^40.0.0",
+      "gravatar": "^1.8.0",
+      "images-upload-middleware": "^1.1.1",
+      "jsonwebtoken": "^8.5.1",
+      "lodash": "^4.17.15",
+      "mongoose": "^5.6.1",
+      "multer": "^1.4.2",
+      "node-fetch": "^2.6.0",
+      "nodemailer": "^6.2.1",
+      "nodemailer-express-handlebars": "^3.0.0",
+      "nodemailer-smtp-transport": "^2.7.4",
+      "passport": "^0.4.0",
+      "passport-facebook": "^3.0.0",
+      "passport-jwt": "^4.0.0",
+      "passport-local": "^1.0.0",
+      "pusher": "^2.2.2",
+      "validator": "^11.0.0"
+    },
+    "devDependencies": {}
+  }
+
+yarn manifest: 
+  No manifest
+
+Lockfile: 
+  No lockfile
+
+Trace: 
+  Error: C:\Users\ASUS\Desktop\projects\nourkhra\BienImmoBackend\node_modules\bcrypt: Command failed.
+  Exit code: 1
+  Command: C:\WINDOWS\system32\cmd.exe
+  Arguments: /d /s /c node-pre-gyp install --fallback-to-build
+  Directory: C:\Users\ASUS\Desktop\projects\nourkhra\BienImmoBackend\node_modules\bcrypt
+  Output:
+  node-pre-gyp info it worked if it ends with ok
+  node-pre-gyp info using node-pre-gyp@0.13.0
+  node-pre-gyp info using node@10.16.3 | win32 | x64
+  node-pre-gyp WARN Using request for node-pre-gyp https download 
+  node-pre-gyp info check checked for "C:\Users\ASUS\Desktop\projects\nourkhra\BienImmoBackend\node_modules\bcrypt\lib\binding\bcrypt_lib.node" (not found)
+  node-pre-gyp http GET https://github.com/kelektiv/node.bcrypt.js/releases/download/v3.0.7/bcrypt_lib-v3.0.7-node-v64-win32-x64-unknown.tar.gz
+  node-pre-gyp http 404 https://github.com/kelektiv/node.bcrypt.js/releases/download/v3.0.7/bcrypt_lib-v3.0.7-node-v64-win32-x64-unknown.tar.gz
+  node-pre-gyp WARN Tried to download(404): https://github.com/kelektiv/node.bcrypt.js/releases/download/v3.0.7/bcrypt_lib-v3.0.7-node-v64-win32-x64-unknown.tar.gz 
+  node-pre-gyp WARN Pre-built binaries not found for bcrypt@3.0.7 and node@10.16.3 (node-v64 ABI, unknown) (falling back to source compile with node-gyp) 
+  node-pre-gyp http 404 status code downloading tarball https://github.com/kelektiv/node.bcrypt.js/releases/download/v3.0.7/bcrypt_lib-v3.0.7-node-v64-win32-x64-unknown.tar.gz 
+  
+  CLINK C:\Users\ASUS\Desktop\projects\nourkhra\BienImmoBackend\node_modules\bcrypt>if not defined npm_config_node_gyp (node "C:\Program Files\nodejs\node_modules\npm\bin\node-gyp-bin\\..\..\node_modules\node-gyp\bin\node-gyp.js" clean )  else (node "" clean ) 
+  gyp info it worked if it ends with ok
+  gyp info using node-gyp@3.8.0
+  gyp info using node@10.16.3 | win32 | x64
+  gyp info ok 
+  
+  CLINK C:\Users\ASUS\Desktop\projects\nourkhra\BienImmoBackend\node_modules\bcrypt>if not defined npm_config_node_gyp (node "C:\Program Files\nodejs\node_modules\npm\bin\node-gyp-bin\\..\..\node_modules\node-gyp\bin\node-gyp.js" configure --fallback-to-build --module=C:\Users\ASUS\Desktop\projects\nourkhra\BienImmoBackend\node_modules\bcrypt\lib\binding\bcrypt_lib.node --module_name=bcrypt_lib --module_path=C:\Users\ASUS\Desktop\projects\nourkhra\BienImmoBackend\node_modules\bcrypt\lib\binding --napi_version=4 --node_abi_napi=napi --napi_build_version=0 --node_napi_label=node-v64 )  else (node "" configure --fallback-to-build --module=C:\Users\ASUS\Desktop\projects\nourkhra\BienImmoBackend\node_modules\bcrypt\lib\binding\bcrypt_lib.node --module_name=bcrypt_lib --module_path=C:\Users\ASUS\Desktop\projects\nourkhra\BienImmoBackend\node_modules\bcrypt\lib\binding --napi_version=4 --node_abi_napi=napi --napi_build_version=0 --node_napi_label=node-v64 ) 
+  gyp info it worked if it ends with ok
+  gyp info using node-gyp@3.8.0
+  gyp info using node@10.16.3 | win32 | x64
+  gyp ERR! configure error 
+  gyp ERR! stack Error: Can't find Python executable "python", you can set the PYTHON env variable.
+  gyp ERR! stack     at PythonFinder.failNoPython (C:\Program Files\nodejs\node_modules\npm\node_modules\node-gyp\lib\configure.js:484:19)
+  gyp ERR! stack     at PythonFinder.<anonymous> (C:\Program Files\nodejs\node_modules\npm\node_modules\node-gyp\lib\configure.js:509:16)
+  gyp ERR! stack     at C:\Program Files\nodejs\node_modules\npm\node_modules\graceful-fs\polyfills.js:282:31
+  gyp ERR! stack     at FSReqWrap.oncomplete (fs.js:153:21)
+  gyp ERR! System Windows_NT 10.0.17763
+  gyp ERR! command "C:\\Program Files\\nodejs\\node.exe" "C:\\Program Files\\nodejs\\node_modules\\npm\\node_modules\\node-gyp\\bin\\node-gyp.js" "configure" "--fallback-to-build" "--module=C:\\Users\\ASUS\\Desktop\\projects\\nourkhra\\BienImmoBackend\\node_modules\\bcrypt\\lib\\binding\\bcrypt_lib.node" "--module_name=bcrypt_lib" "--module_path=C:\\Users\\ASUS\\Desktop\\projects\\nourkhra\\BienImmoBackend\\node_modules\\bcrypt\\lib\\binding" "--napi_version=4" "--node_abi_napi=napi" "--napi_build_version=0" "--node_napi_label=node-v64"
+  gyp ERR! cwd C:\Users\ASUS\Desktop\projects\nourkhra\BienImmoBackend\node_modules\bcrypt
+  gyp ERR! node -v v10.16.3
+  gyp ERR! node-gyp -v v3.8.0
+  gyp ERR! not ok 
+  node-pre-gyp ERR! build error 
+  node-pre-gyp ERR! stack Error: Failed to execute 'node-gyp.cmd configure --fallback-to-build --module=C:\Users\ASUS\Desktop\projects\nourkhra\BienImmoBackend\node_modules\bcrypt\lib\binding\bcrypt_lib.node --module_name=bcrypt_lib --module_path=C:\Users\ASUS\Desktop\projects\nourkhra\BienImmoBackend\node_modules\bcrypt\lib\binding --napi_version=4 --node_abi_napi=napi --napi_build_version=0 --node_napi_label=node-v64' (1)
+  node-pre-gyp ERR! stack     at ChildProcess.<anonymous> (C:\Users\ASUS\Desktop\projects\nourkhra\BienImmoBackend\node_modules\node-pre-gyp\lib\util\compile.js:83:29)
+  node-pre-gyp ERR! stack     at ChildProcess.emit (events.js:198:13)
+  node-pre-gyp ERR! stack     at maybeClose (internal/child_process.js:982:16)
+  node-pre-gyp ERR! stack     at Process.ChildProcess._handle.onexit (internal/child_process.js:259:5)
+  node-pre-gyp ERR! System Windows_NT 10.0.17763
+  node-pre-gyp ERR! command "C:\\Program Files\\nodejs\\node.exe" "C:\\Users\\ASUS\\Desktop\\projects\\nourkhra\\BienImmoBackend\\node_modules\\node-pre-gyp\\bin\\node-pre-gyp" "install" "--fallback-to-build"
+  node-pre-gyp ERR! cwd C:\Users\ASUS\Desktop\projects\nourkhra\BienImmoBackend\node_modules\bcrypt
+  node-pre-gyp ERR! node -v v10.16.3
+  node-pre-gyp ERR! node-pre-gyp -v v0.13.0
+  node-pre-gyp ERR! not ok 
+  Failed to execute 'node-gyp.cmd configure --fallback-to-build --module=C:\Users\ASUS\Desktop\projects\nourkhra\BienImmoBackend\node_modules\bcrypt\lib\binding\bcrypt_lib.node --module_name=bcrypt_lib --module_path=C:\Users\ASUS\Desktop\projects\nourkhra\BienImmoBackend\node_modules\bcrypt\lib\binding --napi_version=4 --node_abi_napi=napi --napi_build_version=0 --node_napi_label=node-v64' (1)
+      at ProcessTermError.MessageError (C:\Program Files (x86)\Yarn\lib\cli.js:186:110)
+      at new ProcessTermError (C:\Program Files (x86)\Yarn\lib\cli.js:226:113)
+      at ChildProcess.<anonymous> (C:\Program Files (x86)\Yarn\lib\cli.js:30281:17)
+      at ChildProcess.emit (events.js:198:13)
+      at maybeClose (internal/child_process.js:982:16)
+      at Process.ChildProcess._handle.onexit (internal/child_process.js:259:5)
