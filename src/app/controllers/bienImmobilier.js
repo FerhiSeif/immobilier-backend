@@ -43,6 +43,7 @@ router.post("/add", upload.any(), authMiddleware, (req, res) => {
         etat: req.body.etat,
         categorie: req.body.categorie,
         options: req.body.options,
+        myoptions:req.body.myoptions,
         files: fileinfo,
         situation: req.body.situation,
         video: req.body.video,
