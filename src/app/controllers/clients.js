@@ -101,10 +101,10 @@ router.post("/login", (req, res) => {
     //check password
     else if (bcrypt.compare(motDePasse, user.motDePasse)) {
       // user matched
-      const payload = { id: user.id,  role:user.role }; //create jwt payload
+      const payload = { id: user.id, nom: user.nom, role: user.role }; //create jwt payload
       //sign Token
 
-      let token = await jwt.sign(payload, "immobilier-app");
+      let token = await jwt.sign({ _id: user._id }, "immobilier-app");
 
       user.tokens = user.tokens.concat({ token });
       await user.save();
@@ -375,7 +375,8 @@ router.get("/profile", authMiddleware, (req, res) => {
     "date",
     "description",
     "socialMedia",
-    "favoris"
+    "favoris",
+    "role"
   ]);
 
   res.send(response);
