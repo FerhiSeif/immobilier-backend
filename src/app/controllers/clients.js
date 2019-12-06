@@ -29,7 +29,7 @@ var storage = multer.diskStorage({
         cb(null, __dirname + "../../../../public/uploads");
     },
     filename: function(req, file, cb) {
-        cb(null, Date.now() + file.originalname);
+        cb(null, Date.now() + file.originalname + '.png');
     }
 });
 
@@ -392,7 +392,7 @@ router.post("/update-profile", upload.any(), authMiddleware, async(req, res) => 
     // console.log(title);
     console.log(' req.files ');
     console.log(req.files);
-    let user = await User.findByIdAndUpdate(req.user._id, {files: fileinfo,...req.body });
+    let user = await User.findByIdAndUpdate(req.user._id, { files: fileinfo, ...req.body });
     res.send(user);
 });
 
