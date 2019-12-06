@@ -4,7 +4,7 @@ const Schema = mongoose.Schema;
 const NegocierPrixSchema = new Schema({
     nom: {
         type: String,
-
+        
     },
 
     tel: {

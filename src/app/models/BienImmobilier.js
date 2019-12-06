@@ -121,7 +121,11 @@ const BienImmobilierSchema = mongoose.model(
    },
    lng:{
      type: String
-   }
+   },
+   nomAgent:{
+    type: String 
+       
+   },
     })
 );
 module.exports = mongoose.model("BienImmobilier");

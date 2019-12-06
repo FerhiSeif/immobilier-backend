@@ -6,11 +6,10 @@ const NegocierPrix = require("../models/NegocierPrix");
 router.post("/add", (req, res) => {
     //create doc(NegocierPrix) from module(NegocierPrix)
     const negocierPrix = new NegocierPrix({
-        // userId: req.user._id,
         nom: req.body.nom,
         tel: req.body.tel,
         email: req.body.email,
-        prixPropose: req.body.message
+        prixPropose: req.body.prixPropose
     });
 
     negocierPrix
@@ -21,6 +20,7 @@ router.post("/add", (req, res) => {
         .catch(err => {
             res.json(err);
         });
+ console.log("negocier",negocierPrix)
 });
 
 router.get("/all", function(req, res) {

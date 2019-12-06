@@ -64,6 +64,10 @@ const UserSchema = new mongoose.Schema({
     socialMedia: {
       type: Object
     },
+     files: {
+
+            type: Object
+        },
     favoris: [
       {
         type: mongoose.Schema.Types.ObjectId,
