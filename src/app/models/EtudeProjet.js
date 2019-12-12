@@ -39,15 +39,14 @@ const EtudeprojetSchema = new Schema({
         type: Date,
         default: Date.now
     },
-     statut: {
+    statut: {
 
         type: String
     },
-    nomAgent:{
+    agentId: {
         type: String
     }
 
 });
 // use schema to create mongooses module
-module.exports = mongoose.model("Etudeprojet", EtudeprojetSchema);
 module.exports = mongoose.model("Etudeprojet", EtudeprojetSchema);

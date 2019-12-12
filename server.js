@@ -32,6 +32,7 @@ var estimation = require("./src/app/controllers/estimation");
 var demandeVisite = require("./src/app/controllers/visites");
 var demandeAchat = require("./src/app/controllers/demandeAchat");
 var demandeLocation = require("./src/app/controllers/demandeLocation");
+var avis = require("./src/app/controllers/avis");
 
 
 //CORS vous permet de configurer la sécurité de l'API Web. Il s'agit de permettre à d'autres domaines de faire des requêtes contre votre API Web. Par exemple, si vous aviez votre API Web sur un serveur et votre application Web sur un autre, vous pouvez configurer CORS dans votre API Web pour permettre à votre application Web d'appeler votre API Web.
@@ -66,6 +67,7 @@ app.use("/estimations", estimation);
 app.use("/demandeVisites", demandeVisite);
 app.use("/demandeAchats", demandeAchat);
 app.use("/demandeLocations", demandeLocation);
+app.use("/avis", avis);
 
 //********
 

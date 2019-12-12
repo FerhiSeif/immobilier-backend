@@ -29,7 +29,7 @@ var storage = multer.diskStorage({
         cb(null, __dirname + "../../../../public/uploads");
     },
     filename: function(req, file, cb) {
-        cb(null, Date.now() + file.originalname + '.png');
+        cb(null, Date.now() + file.originalname);
     }
 });
 
@@ -132,7 +132,8 @@ router.post("/login", (req, res) => {
                     "date",
                     "description",
                     "socialMedia",
-                    "favoris"
+                    "favoris",
+                    "mission"
                 ]),
                 token: token
             });
@@ -153,6 +154,7 @@ router.put("/deactivateUser", (req, res) => {
             .then(resp => res.status(200).json(resp))
             .catch(err => res.status(400).json(err));
     }),
+
     router.put("/activateUser", async(req, res) => {
         await User.findByIdAndUpdate(req.body.userId, {
                 $set: { activated: true }
@@ -196,7 +198,16 @@ router.get("/all", function(req, res) {
             }
         });
 });
+
 //*********************GET ALL AGENTS*********************
+//********************************Get user by id*************
+router.get("/userId", function(req, res) {
+  User.findOne(req.params.id, (err, data) => {
+    if (err) res.status(400).send("fetching selected annoncement failed");
+    res.send(data);
+  });
+});
+//*******************************************************
 router.get("/agents/all", function(req, res) {
     User.find({ role: "agent" })
         // .populate("role", "nom")

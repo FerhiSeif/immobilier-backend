@@ -14,7 +14,7 @@ router.post("/add", (req, res) => {
         budget: req.body.budget,
         description2: req.body.description2,
         statut: req.body.statut,
-        nomAgent: req.body.nomAgent
+        agentId: req.body.agentId
     });
 
     etudeProjet

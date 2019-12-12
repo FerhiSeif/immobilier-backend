@@ -3,25 +3,23 @@ const Schema = mongoose.Schema;
 // create Schema
 const ConseilSchema = new Schema({
     nom: {
-        type: String,
-        required: true,
-        trim: true
+        type: String
     },
 
     tel: {
         type: String
     },
     email: {
-        required: true,
+
         type: String
     },
-    nomAgent: {
-        required: true,
+    agentId: {
+
         type: String
     },
 
     message: {
-        required: true,
+
         type: String
     },
     date: {

@@ -4,32 +4,32 @@ const router = express.Router(); // create Router
 const Conseil = require("../models/Conseils");
 // conseils APIs on Router
 router.post("/addconseils", (req, res) => {
-  //create doc(conseil) from module(Conseil)
-  const conseil = new Conseil({
-    nom: req.body.nom,
-    tel: req.body.tel,
-    nomAgent: req.body.nomAgent,
-    email: req.body.email,
-    message: req.body.message
-  });
-
-  conseil
-    .save()
-    .then(conseil => {
-      res.send(conseil);
-    })
-    .catch(err => {
-      res.json(err);
+    //create doc(conseil) from module(Conseil)
+    const conseil = new Conseil({
+        nom: req.body.nom,
+        tel: req.body.tel,
+        agentId: req.body.agentId,
+        email: req.body.email,
+        message: req.body.message
     });
+
+    conseil
+        .save()
+        .then(conseil => {
+            res.send(conseil);
+        })
+        .catch(err => {
+            res.json(err);
+        });
 });
 
 router.get("/all", function(req, res) {
-  Conseil.find({})
-    .then(conseil => {
-      res.send(conseil);
-    })
-    .catch(err => {
-      res.json(err);
-    });
+    Conseil.find({})
+        .then(conseil => {
+            res.send(conseil);
+        })
+        .catch(err => {
+            res.json(err);
+        });
 });
 module.exports = router;
