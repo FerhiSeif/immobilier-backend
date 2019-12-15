@@ -48,27 +48,29 @@ router.post("/sendEmail", function(req, res) {
             tls: { rejectUnauthorized: false },
             debug: true
         })
-    );
+    )
 
     const mailOptions = {
-        from: req.body.email, // sender address
+       
+        from: "bienImmo2020@gmail.com",
         to: "bienImmo2020@gmail.com",
-        //to: req.body.agent.email,
-        subject: "date de rencontre ",
-        html: req.body.message + "  <br> Cordialement "
+        subject: "  Contact",
+        html: "from : " + req.body.email+"<br>"+"nom : " + req.body.nom+"<br>" + "tel : "+req.body.tel+
+         "<br>" +"Message : " +req.body.message+ "<br>"+"Cordialement"
     };
 
-    //sending the email //
+    //sending the email 
+     console.log("req.body")
 
+ console.log(req.body)
     transporter.sendMail(mailOptions, function(err, info) {
         if (err) {
             console.log(err);
             res.send(err);
         } else {
-            console.log("hii info" + info);
+            console.log("email envoye" + info);
             res.send(info);
         }
     });
 });
-
 module.exports = router;

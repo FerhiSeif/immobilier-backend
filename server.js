@@ -21,7 +21,6 @@ var mail = require("./src/app/controllers/mails");
 
 var User = require("./src/app/models/UserSchema");
 
-var allUser = require("./src/app/controllers/user");
 var offre = require("./src/app/controllers/offres");
 var etudeProjet = require("./src/app/controllers/etudeProjet");
 var autre = require("./src/app/controllers/autre");
@@ -54,7 +53,6 @@ app.use("/agents", agent);
 app.use("/chefAgences", chefAgence);
 
 app.use("/mails", mail);
-app.use("/users", allUser);
 app.use("/offres", offre);
 app.use("/conseils", conseil); //conseils Router as a Layer in root Router
 app.use("/reclamations", reclamation);

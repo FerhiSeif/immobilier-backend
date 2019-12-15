@@ -13,9 +13,8 @@ const DemandeAchatSchema = new Schema({
         ref: "immobiliers",
 
     },
-    idAgent: {
-        type: Schema.Types.ObjectId,
-        ref: "agents",
+    agentId: {
+        type: String
 
     },
     categorie: {

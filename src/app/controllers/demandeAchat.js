@@ -17,7 +17,7 @@ router.post("/add", authMiddleware, (req, res) => {
     var demandeAchat = new DemandeAchat({
         userId: req.user._id,
         idImmobilier: req.body.idImmobilier,
-        idAgent: req.body.idAgent,
+        agentId: req.body.agentId,
         region: req.body.region,
         surface: req.body.surface,
         prix: req.body.prix,
