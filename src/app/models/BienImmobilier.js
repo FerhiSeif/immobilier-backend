@@ -110,22 +110,15 @@ const BienImmobilierSchema = mongoose.model(
       type: Boolean,
       default: false
     },
-        video: {
-            type: String
-        },
-        nombreSalon: {
-            type: String
-        },
-   lat: {
-     type: String
-   },
-   lng:{
-     type: String
-   },
-   nomAgent:{
-    type: String 
-       
-   }
+    video: {
+      type: String
+    },
+    lat: {
+      type: String
+    },
+    lng: {
+      type: String
+    }
   })
 );
 module.exports = mongoose.model("BienImmobilier");
