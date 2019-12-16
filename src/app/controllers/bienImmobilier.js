@@ -17,42 +17,40 @@ var storage = multer.diskStorage({
 var upload = multer({ storage: storage });
 
 router.post("/add", upload.any(), authMiddleware, (req, res) => {
+  var fileinfo = req.files;
+  var title = req.body.title;
+  // console.log(title);
+  console.log(" req.files ");
+  console.log(req.files);
 
-
-    var fileinfo = req.files;
-    var title = req.body.title;
-    // console.log(title);
-    console.log(' req.files ');
-    console.log(req.files);
-
-    var bienImmobilier = new BienImmobilier({
-        //  ...req.body,
-        userId: req.user._id,
-        // userId: req.body.userId,
-        titre: req.body.titre,
-        region: req.body.region,
-        surface: req.body.surface,
-        prix: req.body.prix,
-        nombreEtage: req.body.nombreEtage,
-        nombrePiece: req.body.nombrePiece,
-        nombreFacade: req.body.nombreFacade,
-        nombreSalleDeBain: req.body.nombreSalleDeBain,
-        statut: req.body.statut,
-        description: req.body.description,
-        ALaUne: req.body.ALaUne,
-        ValableAPartirDe: req.body.ValableAPartirDe,
-        etat: req.body.etat,
-        categorie: req.body.categorie,
-        options: req.body.options,
-        myoptions: req.body.myoptions,
-        files: fileinfo,
-        situation: req.body.situation,
-        video: req.body.video,
-        nombreSalon: req.body.nombreSalon,
-        lat: req.body.lat,
-        lng: req.body.lng,
-        nomAgent: req.body.nomAgent
-    });
+  var bienImmobilier = new BienImmobilier({
+    //  ...req.body,
+    // userId: req.body.userId,
+    userId: req.user._id,
+    titre: req.body.titre,
+    region: req.body.region,
+    surface: req.body.surface,
+    prix: req.body.prix,
+    nombreEtage: req.body.nombreEtage,
+    nombrePiece: req.body.nombrePiece,
+    nombreFacade: req.body.nombreFacade,
+    nombreSalleDeBain: req.body.nombreSalleDeBain,
+    statut: req.body.statut,
+    description: req.body.description,
+    ALaUne: req.body.ALaUne,
+    ValableAPartirDe: req.body.ValableAPartirDe,
+    etat: req.body.etat,
+    categorie: req.body.categorie,
+    options: req.body.options,
+    myoptions: req.body.myoptions,
+    files: fileinfo,
+    situation: req.body.situation,
+    video: req.body.video,
+    nombreSalon: req.body.nombreSalon,
+    lat: req.body.lat,
+    lng: req.body.lng,
+    agentId: userRole === "agent" ? req.user._id : req.body.agentId
+  });
 
   bienImmobilier
     .save()
@@ -152,7 +150,6 @@ router.put("/update-selected-annoncement/:id", authMiddleware, (req, res) => {
     );
   }
 });
-
 
 module.exports = router;
 

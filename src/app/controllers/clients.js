@@ -181,11 +181,11 @@ router.get(
     }
 );
 
-//***************************************************
+//*****************GET ALL CLIENTS***************************
 router.get("/all", function(req, res) {
     User.find({})
-        .populate("role", "nom")
-        .populate("reclamation")
+        // .populate("role", "nom")
+        // .populate("reclamation")
         .exec(function(err, result) {
             if (err) {
                 res.send(err);
@@ -383,15 +383,17 @@ function ensureAuthenticated(req, res, next) {
 
 router.get("/profile", authMiddleware, (req, res) => {
     let response = _.pick(req.user, [
-        "_id",
-        "nom",
-        "tel",
-        "adress",
-        "email",
-        "date",
-        "description",
-        "socialMedia",
-        "favoris"
+    "_id",
+    "nom",
+    "prenom",
+    "tel",
+    "adress",
+    "email",
+    "date",
+    "description",
+    "socialMedia",
+    "favoris",
+    "role"
     ]);
 
     res.send(response);
@@ -400,11 +402,13 @@ router.get("/profile", authMiddleware, (req, res) => {
 router.post("/update-profile", upload.any(), authMiddleware, async(req, res) => {
     var fileinfo = req.files;
     var title = req.body.title;
-    // console.log(title);
-    console.log(' req.files ');
-    console.log(req.files);
-    let user = await User.findByIdAndUpdate(req.user._id, { files: fileinfo, ...req.body });
+    if (req.user.role === "chefAgence") {
+        let user = await User.findByIdAndUpdate(req.body._id, { files: fileinfo, ...req.body });
+        res.send(user);
+    }else{
+        let user = await User.findByIdAndUpdate(req.user._id, { files: fileinfo, ...req.body });
     res.send(user);
+    }   
 });
 
 router.put("/logout", authMiddleware, (req, res) => {

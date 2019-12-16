@@ -103,6 +103,7 @@ router.post("/sendEmail", function(req, res) {
   };
 
   //sending the email
+  
   console.log("req.body");
 
   console.log(req.body);
