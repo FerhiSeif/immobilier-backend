@@ -12,16 +12,13 @@ var app = express();
 //****************************************************
 var client = require("./src/app/controllers/clients");
 var conseil = require("./src/app/controllers/conseils");
-var agent = require("./src/app/controllers/agents");
-//****************************************************
-var chefAgence = require("./src/app/controllers/chefAgences");
+
 //*********
 var reclamation = require("./src/app/controllers/reclamations");
 var mail = require("./src/app/controllers/mails");
 
 var User = require("./src/app/models/UserSchema");
 
-var offre = require("./src/app/controllers/offres");
 var etudeProjet = require("./src/app/controllers/etudeProjet");
 var autre = require("./src/app/controllers/autre");
 var bienImmobilier = require("./src/app/controllers/bienImmobilier");
@@ -49,11 +46,11 @@ app.use(express.static('public'));
 app.use(bodyParser.json());
 app.set("secretKey", "tokentest");
 app.use("/clients", client);
-app.use("/agents", agent);
-app.use("/chefAgences", chefAgence);
+
+
 
 app.use("/mails", mail);
-app.use("/offres", offre);
+
 app.use("/conseils", conseil); //conseils Router as a Layer in root Router
 app.use("/reclamations", reclamation);
 app.use("/etudeProjets", etudeProjet);
