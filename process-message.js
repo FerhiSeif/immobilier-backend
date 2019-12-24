@@ -1,69 +1,75 @@
-// process-message.js
+﻿const Dialogflow = require('dialogflow');
+const Pusher = require('pusher');
+const getWeatherInfo = require('./weather');
 
-const Dialogflow = require("dialogflow");
-const Pusher = require("pusher");
-const getWeatherInfo = require("./weather");
 // You can find your project ID in your Dialogflow agent settings
-const projectId = "agent-bot-rcfdld";
-const sessionId = "123456";
-const languageCode = "fr";
+const projectId = 'reactbot-urspxt'
+const sessionId = '123456';
+const languageCode = 'en-US';
 
 const config = {
-  credentials: {
-    private_key: process.env.DIALOGFLOW_PRIVATE_KEY,
-    client_email: process.env.DIALOGFLOW_CLIENT_EMAIL
-  }
+    credentials: {
+        private_key: process.env.DIALOGFLOW_PRIVATE_KEY,
+        client_email: process.env.DIALOGFLOW_CLIENT_EMAIL,
+    },
 };
 
 const pusher = new Pusher({
-  appId: process.env.PUSHER_APP_ID,
-  key: process.env.PUSHER_APP_KEY,
-  secret: process.env.PUSHER_APP_SECRET,
-  cluster: process.env.PUSHER_APP_CLUSTER,
-  encrypted: true
+    appId: process.env.PUSHER_APP_ID,
+    key: process.env.PUSHER_APP_KEY,
+    secret: process.env.PUSHER_APP_SECRET,
+    cluster: process.env.PUSHER_APP_CLUSTER,
+    encrypted: true,
 });
 
 const sessionClient = new Dialogflow.SessionsClient(config);
 
 const sessionPath = sessionClient.sessionPath(projectId, sessionId);
 
-// process-message.js
-
 const processMessage = message => {
-  const request = {
-    session: sessionPath,
-    queryInput: {
-      text: {
-        text: message,
-        languageCode
-      }
-    }
-  };
+    const request = {
+        session: sessionPath,
+        queryInput: {
+            text: {
+                text: message,
+                languageCode,
+            },
+        },
+    };
 
-  sessionClient
-    .detectIntent(request)
-    .then(responses => {
-      const result = responses[0].queryResult;
+    sessionClient
+        .detectIntent(request)
+        .then(responses => {
+            const result = responses[0].queryResult;
 
-      // If the intent matches 'detect-city'
-      if (result.intent.displayName === "detect-city") {
-        const city = result.parameters.fields["geo-city"].stringValue;
+            // If the intent matches 'detect-city'
+            if (result.intent.displayName === 'detect-city') {
+                const city = result.parameters.fields['geo-city'].stringValue;
 
-        // fetch the temperature from openweather map
-        return getWeatherInfo(city).then(temperature => {
-          return pusher.trigger("bot", "bot-response", {
-            message: `The weather is ${city} is ${temperature}°C`
-          });
+                // fetch the temperature from openweather map
+                return getWeatherInfo(city).then(temperature => {
+                    return pusher.trigger('bot', 'bot-response', {
+                        message: `The weather is ${city} is ${temperature}°C`,
+                    });
+                });
+            } else if (result.intent.displayName === 'bot') {
+                const city = result.parameters.fields['any'].stringValue;
+
+                // fetch the temperature from openweather map
+
+                return pusher.trigger('bot', 'bot-response', {
+                    message: `:) bonjour Monsieur! vous avez besoins d'aide?`,
+
+                });
+            }
+
+            return pusher.trigger('bot', 'bot-response', {
+                message: result.fulfillmentText,
+            });
+        })
+        .catch(err => {
+            console.error('ERROR:', err);
         });
-      }
-
-      return pusher.trigger("bot", "bot-response", {
-        message: result.fulfillmentText
-      });
-    })
-    .catch(err => {
-      console.error("ERROR:", err);
-    });
 };
 
 module.exports = processMessage;
