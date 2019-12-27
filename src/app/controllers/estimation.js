@@ -32,7 +32,7 @@ router.post("/add", upload.any(), (req, res) => {
         categorie: req.body.categorie,
         files: fileinfo,
         situation: req.body.situation
-
+         
     });
 
 

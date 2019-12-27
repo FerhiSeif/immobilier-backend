@@ -22,7 +22,7 @@ const UserSchema = new mongoose.Schema({
     },
     nom: {
       type: String,
-      required: true,
+      
       trim: true
     },
     prenom: {
@@ -38,12 +38,12 @@ const UserSchema = new mongoose.Schema({
     },
 
     email: {
-      required: true,
+      
       type: String
     },
 
     motDePasse: {
-      required: true,
+      
       type: String
     },
     date: {

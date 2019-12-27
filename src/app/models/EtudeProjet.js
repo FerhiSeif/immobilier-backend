@@ -4,14 +4,16 @@ const Schema = mongoose.Schema;
 const EtudeprojetSchema = new Schema({
     nom: {
         type: String,
-        required: true
-    },
 
+    },
+    prenom: {
+        type: String,
+
+    },
     tel: {
         type: String
     },
     email: {
-        required: true,
         type: String
     },
     description: {

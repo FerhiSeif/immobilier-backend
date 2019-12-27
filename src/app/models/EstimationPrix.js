@@ -38,7 +38,11 @@ const EstimationSchema = new Schema({
     
     situation: {
       type: Boolean
-    }
+    },
+    date: {
+      type: Date,
+      default: Date.now
+    },
 
 
 });

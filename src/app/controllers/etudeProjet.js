@@ -7,6 +7,7 @@ router.post("/add", (req, res) => {
     //create doc(EtudeProjet) from module(EtudeProjet)
     const etudeProjet = new EtudeProjet({
         nom: req.body.nom,
+        prenom: req.body.prenom,
         tel: req.body.tel,
         email: req.body.email,
         description: req.body.description,

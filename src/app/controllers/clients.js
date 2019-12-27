@@ -202,10 +202,11 @@ router.get("/all", function(req, res) {
 //*********************GET ALL AGENTS*********************
 //********************************Get user by id*************
 router.get("/userId", function(req, res) {
-  User.findOne(req.params.id, (err, data) => {
-    if (err) res.status(400).send("fetching selected annoncement failed");
-    res.send(data);
-  });
+    User.findOne(req.params.id, (err, data) => {
+        if (err) res.status(400).send("fetching  failed");
+        console.log(data)
+        res.send(data);
+    });
 });
 //*******************************************************
 router.get("/agents/all", function(req, res) {
@@ -383,17 +384,17 @@ function ensureAuthenticated(req, res, next) {
 
 router.get("/profile", authMiddleware, (req, res) => {
     let response = _.pick(req.user, [
-    "_id",
-    "nom",
-    "prenom",
-    "tel",
-    "adress",
-    "email",
-    "date",
-    "description",
-    "socialMedia",
-    "favoris",
-    "role"
+        "_id",
+        "nom",
+        "prenom",
+        "tel",
+        "adress",
+        "email",
+        "date",
+        "description",
+        "socialMedia",
+        "favoris",
+        "role"
     ]);
 
     res.send(response);
@@ -405,10 +406,10 @@ router.post("/update-profile", upload.any(), authMiddleware, async(req, res) => 
     if (req.user.role === "chefAgence") {
         let user = await User.findByIdAndUpdate(req.body._id, { files: fileinfo, ...req.body });
         res.send(user);
-    }else{
+    } else {
         let user = await User.findByIdAndUpdate(req.user._id, { files: fileinfo, ...req.body });
-    res.send(user);
-    }   
+        res.send(user);
+    }
 });
 
 router.put("/logout", authMiddleware, (req, res) => {
@@ -452,4 +453,4 @@ router.put("/delete-favorite", authMiddleware, (req, res) => {
     });
 });
 
-module.exports = router;
+module.exports = router
