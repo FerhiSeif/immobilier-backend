@@ -183,7 +183,7 @@ router.get(
 
 //*****************GET ALL CLIENTS***************************
 router.get("/all", function(req, res) {
-    User.find({})
+    User.find({ role: "client" })
         // .populate("role", "nom")
         // .populate("reclamation")
         .exec(function(err, result) {
