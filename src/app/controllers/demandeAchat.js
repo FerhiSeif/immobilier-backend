@@ -49,22 +49,20 @@ router.get("/selecteddemandeachat/:id", (req, res) => {
   });
 });
 
-
 // edit demande achat
 
-router.put("/edit-demandeachat/:id", async (req, res)=>{
+router.put("/edit-demandeachat/:id", authMiddleware, async (req, res) => {
   DemandeAchat.findOneAndUpdate(
-    { _id: req.params.id, agentId: req.user._id },
-    { ...req.body},
+    { _id: req.params.id },
+    { ...req.body },
     (err, data) => {
-      if (err)
-        res
-          .status(400)
-          .send("editing selected demande failed" + err.message);
+      if (err) {
+      res.status(400).send("editing selected demande failed" + err.message);}
+      console.log("data", { ...req.body });
       res.status(200).send(data);
     }
   );
-})
+});
 
 //send email
 

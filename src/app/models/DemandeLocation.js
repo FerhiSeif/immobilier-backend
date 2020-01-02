@@ -45,6 +45,11 @@ const DemandeLocationSchema = new Schema({
         trim: true,
 
     },
+    status: {
+        type: String,
+        value: ["confirme", "en attente", "non confirme"],
+        default: "non confirme"
+    },
     message: {
         type: String,
 

@@ -29,10 +29,11 @@ const DemandeAchatSchema = new Schema({
     prix: {
         type: String
     },
-
-
-
-
+    status: {
+        type: String,
+        value: ["confirme", "en attente", "non confirme"],
+        default: "non confirme"
+    },
     nom: {
         type: String,
         trim: true,

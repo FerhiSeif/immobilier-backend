@@ -24,6 +24,7 @@ router.post("/add", upload.any(), authMiddleware, async (req, res) => {
     console.log(req.files);
    let currentUser = await User.findOne({_id:req.user._id })
    let userRole = currentUser.role
+   
 
     var bienImmobilier = new BienImmobilier({
         //  ...req.body,

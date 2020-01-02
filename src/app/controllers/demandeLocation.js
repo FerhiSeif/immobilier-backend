@@ -52,7 +52,7 @@ router.get("/selecteddemandeloc/:id", (req, res) => {
 
 //edit demande location
 
-router.put("/edit-demandeloc/:id", async (req, res)=>{
+router.put("/edit-demandeloc/:id", authMiddleware ,async (req, res)=>{
   DemandeLocation.findOneAndUpdate(
     { _id: req.params.id, agentId: req.user._id },
     { ...req.body},
