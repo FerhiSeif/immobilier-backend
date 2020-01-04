@@ -33,7 +33,7 @@ var demandeVisite = require("./src/app/controllers/visites");
 var demandeAchat = require("./src/app/controllers/demandeAchat");
 var demandeLocation = require("./src/app/controllers/demandeLocation");
 var avis = require("./src/app/controllers/avis");
-
+var notifications = require("./src/app/controllers/notifications");
 
 //CORS vous permet de configurer la sécurité de l'API Web. Il s'agit de permettre à d'autres domaines de faire des requêtes contre votre API Web. Par exemple, si vous aviez votre API Web sur un serveur et votre application Web sur un autre, vous pouvez configurer CORS dans votre API Web pour permettre à votre application Web d'appeler votre API Web.
 
@@ -62,13 +62,14 @@ app.use("/demandeVisites", demandeVisite);
 app.use("/demandeAchats", demandeAchat);
 app.use("/demandeLocations", demandeLocation);
 app.use("/avis", avis);
+app.use("/notifications", notifications);
 
 //**********Chatbot***************//
 
 app.post('/chat', (req, res) => {
-      const { message } = req.body;
-      processMessage(message);
-    });
+    const { message } = req.body;
+    processMessage(message);
+});
 //**********Chatbot***************//
 // Connection URL
 mongoose
@@ -81,51 +82,50 @@ mongoose
 
 /* web push */
 const vapidKeys = {
-  publicKey:
-    "BEiRmN-GB1_y0ypcpA0UxoA-5itoQH2vuxchXn5gu-m8P9yi5hBCNForPGkjWnctnFKKAk2mHU1TjgFusj67aZA",
-  privateKey: "A6HPKVrYS8zV8bPgIwisnEvkUzAid7Jpu6A_zOeI4oA"
+    publicKey: "BEiRmN-GB1_y0ypcpA0UxoA-5itoQH2vuxchXn5gu-m8P9yi5hBCNForPGkjWnctnFKKAk2mHU1TjgFusj67aZA",
+    privateKey: "A6HPKVrYS8zV8bPgIwisnEvkUzAid7Jpu6A_zOeI4oA"
 };
 //setting our previously generated VAPID keys
 webpush.setVapidDetails(
-  "mailto:bienimmo2020@gmail.com",
-  vapidKeys.publicKey,
-  vapidKeys.privateKey
+    "mailto:bienimmo2020@gmail.com",
+    vapidKeys.publicKey,
+    vapidKeys.privateKey
 );
 //function to send the notification to the subscribed device
 const sendNotification = (subscription, dataToSend = "") => {
-  webpush.sendNotification(subscription, dataToSend);
+    webpush.sendNotification(subscription, dataToSend);
 };
 
 /* <- web push */
 
 const saveToDatabase = async subscription => {
-  // Since this is a demo app, I am going to save this in a dummy in memory store. Do not do this in your apps.
-  // Here you should be writing your db logic to save it.
-  dummyDb.subscription = subscription;
+    // Since this is a demo app, I am going to save this in a dummy in memory store. Do not do this in your apps.
+    // Here you should be writing your db logic to save it.
+    dummyDb.subscription = subscription;
 };
 // The new /save-subscription endpoint
-app.post("/save-subscription", async (req, res) => {
-  const subscription = req.body;
-  await saveToDatabase(subscription); //Method to save the subscription to Database
-  res.json({ message: "success" });
+app.post("/save-subscription", async(req, res) => {
+    const subscription = req.body;
+    await saveToDatabase(subscription); //Method to save the subscription to Database
+    res.json({ message: "success" });
 });
 
 //route to test send notification
 app.get("/send-notification", (req, res) => {
-  const subscription = dummyDb.subscription; //get subscription from your databse here.
-  const message = "Hello World from server";
-  sendNotification(subscription, message);
-  res.json({ message: "message sent" });
+    const subscription = dummyDb.subscription; //get subscription from your databse here.
+    const message = "Hello World from server";
+    sendNotification(subscription, message);
+    res.json({ message: "message sent" });
 });
 
 http.listen(4001, () => {
-  console.log(`Listening on http port 4000`);
+    console.log(`Listening on http port 4000`);
 });
 
 io.on("connection", function(socket) {
-  // This event will trigger when any user is connected.
-  // You can use 'socket' to emit and receive events.
-  console.log("a user connected.");
+    // This event will trigger when any user is connected.
+    // You can use 'socket' to emit and receive events.
+    console.log("a user connected.");
 });
 //**************************************//
 
@@ -133,7 +133,7 @@ io.on("connection", function(socket) {
 
 app.set('port', process.env.PORT || 8080);
 const server = app.listen(app.get('port'), () => {
-  console.log(`Express running → PORT ${server.address().port}`);
+    console.log(`Express running → PORT ${server.address().port}`);
 });
 
 // mongoose.connect(

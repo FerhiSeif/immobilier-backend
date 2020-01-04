@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-const Notification = require("../models/Notification");
+const Notification = require("../models/notifModel");
 const User = require("../models/UserSchema");
 const _ = require("underscore");
 
@@ -11,7 +11,7 @@ router.post("/addnotification", async function(req, res) {
   userFetch = await User.find({ role: { $ne: "agent" } });
 
   const newNotif = new Notification({
-    users: userFetch,
+    user: req.body.user,
     object: req.body.object,
     body: req.body.body,
     sender: req.body.sender,
