@@ -58,7 +58,7 @@ router.put("/edit-demandeachat/:id", authMiddleware, async (req, res) => {
     (err, data) => {
       if (err) {
       res.status(400).send("editing selected demande failed" + err.message);}
-      console.log("data", { ...req.body });
+     // console.log("data", { ...req.body });
       res.status(200).send(data);
     }
   );
@@ -81,7 +81,7 @@ router.post("/sendEmail", function(req, res) {
       debug: true
     })
   );
-  console.log(DemandeAchat.message);
+ // console.log(DemandeAchat.message);
   const mailOptions = {
     from: "bienImmo2020@gmail.com",
     to: "bienImmo2020@gmail.com",
@@ -103,15 +103,15 @@ router.post("/sendEmail", function(req, res) {
   };
 
   //sending the email
-  console.log("req.body");
+  //console.log("req.body");
 
-  console.log(req.body);
+  //console.log(req.body);
   transporter.sendMail(mailOptions, function(err, info) {
     if (err) {
-      console.log(err);
+    //  console.log(err);
       res.send(err);
     } else {
-      console.log("email envoye" + info);
+    //  console.log("email envoye" + info);
       res.send(info);
     }
   });

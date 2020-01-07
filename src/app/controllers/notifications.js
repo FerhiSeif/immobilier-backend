@@ -3,6 +3,7 @@ const router = express.Router();
 const Notification = require("../models/notifModel");
 const User = require("../models/UserSchema");
 const _ = require("underscore");
+const authMiddleware = require("../middleware/auth");
 
 //to add notif
 router.post("/addnotification", async function(req, res) {
@@ -40,7 +41,7 @@ router.post("/getnotifnotread", function(req, res) {
 });
 
 ////get all notif
-router.post("/getnotification", async function(req, res) {
+router.get("/getnotification", async function(req, res) {
   const errors = {};
   let nombreNotif = 0;
   await Notification.find({ users: { $in: [req.body.user_Id] } })
@@ -65,7 +66,7 @@ router.post("/getnotification", async function(req, res) {
     .catch(err => res.status(404).json({ err: err }));
 }),
   //put notif
-  router.put("/createnotif", async function(req, res) {
+  router.put("/editnotif", async function(req, res) {
     let userFetch = null;
     if (req.body.role === "agent") {
       userFetch = await User.find({ role: "agent" });
@@ -94,9 +95,9 @@ router.post("/getnotification", async function(req, res) {
 ////
 
 // a chaque fois on doit rempli notification qu'on l'appel
-router.put("/readnotification", function(req, res) {
+router.put("/readnotification/:id", authMiddleware , function(req, res) {
   Notification.findOneAndUpdate(
-    { _id: req.body.id },
+    { _id: req.params.id },
     { $set: { read: true } }
   ).then(resp => res.status(200).json({ notif: "readed" }));
   console.log("read");

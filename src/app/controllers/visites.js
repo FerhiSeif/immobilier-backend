@@ -29,7 +29,7 @@ router.post("/add", (req, res) => {
 router.get("/allFalse", function(req, res) {
     Visite.find({ etat: false }).exec(function(err, result) {
         if (err) {
-            console.log(err);
+         //   console.log(err);
         } else {
             res.send(result);
         }

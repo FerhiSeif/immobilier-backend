@@ -20,8 +20,8 @@ router.post("/add", upload.any(), authMiddleware, async (req, res) => {
     var fileinfo = req.files;
     var title = req.body.title;
     // console.log(title);
-    console.log(" req.files ");
-    console.log(req.files);
+    //console.log(" req.files ");
+    //console.log(req.files);
    let currentUser = await User.findOne({_id:req.user._id })
    let userRole = currentUser.role
    
@@ -67,13 +67,13 @@ router.post("/add", upload.any(), authMiddleware, async (req, res) => {
 
 router.get("/all", function(req, res) {
     let queries = handlingQueries(req.query);
-    console.log(queries);
+    //console.log(queries);
     BienImmobilier.find({...queries, situation: true })
         .then(bienImmobilier => {
             res.send(bienImmobilier);
         })
         .catch(err => {
-            console.log(err);
+            //console.log(err);
             res.json(err);
         });
 });

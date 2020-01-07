@@ -21,8 +21,8 @@ router.post("/add", upload.any(), (req, res) => {
     var fileinfo = req.files;
     var title = req.body.title;
     // console.log(title);
-    console.log(' req.files ');
-    console.log(req.files);
+   // console.log(' req.files ');
+    //console.log(req.files);
 
     var estimation = new Estimation({
 

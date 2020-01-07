@@ -204,7 +204,7 @@ router.get("/all", function(req, res) {
 router.get("/userId", function(req, res) {
     User.findOne(req.params.id, (err, data) => {
         if (err) res.status(400).send("fetching  failed");
-        console.log(data)
+        //console.log(data)
         res.send(data);
     });
 });
@@ -288,7 +288,7 @@ router.post("/forgot", function(req, res, next) {
                         "if you did not request this, please ignore this email and your password will remain ungchanged"
                 };
                 smtpTransport.sendMail(mailOptions, function(err) {
-                    console.log("mail sent");
+                   // console.log("mail sent");
                     res.json({
                         success: true,
                         message: "an email has been sent to " +
@@ -444,7 +444,7 @@ router.get("/favorites", authMiddleware, async(req, res) => {
 
 router.put("/delete-favorite", authMiddleware, (req, res) => {
     let user = req.user;
-    console.log(req.body.annoncementId);
+   // console.log(req.body.annoncementId);
     user.favoris = user.favoris.filter(el => el != req.body.annoncementId);
 
     user.save(err => {

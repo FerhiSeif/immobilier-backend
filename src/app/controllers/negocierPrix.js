@@ -20,7 +20,7 @@ router.post("/add", (req, res) => {
         .catch(err => {
             res.json(err);
         });
- console.log("negocier",negocierPrix)
+// console.log("negocier",negocierPrix)
 });
 
 router.get("/all", function(req, res) {

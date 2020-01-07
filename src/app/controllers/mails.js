@@ -60,15 +60,15 @@ router.post("/sendEmail", function(req, res) {
     };
 
     //sending the email 
-     console.log("req.body")
+    // console.log("req.body")
 
- console.log(req.body)
+ //console.log(req.body)
     transporter.sendMail(mailOptions, function(err, info) {
         if (err) {
-            console.log(err);
+       //     console.log(err);
             res.send(err);
         } else {
-            console.log("email envoye" + info);
+       //     console.log("email envoye" + info);
             res.send(info);
         }
     });

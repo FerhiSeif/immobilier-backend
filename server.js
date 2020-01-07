@@ -13,7 +13,7 @@ const app = express();
 //************for notifications*********************//
 const path = require("path");
 const http = require("http").createServer(app);
-const io = require("socket.io")(http);
+const socketIo = require("socket.io");
 const webpush = require("web-push"); //requiring the web-push module
 const dummyDb = { subscription: null }; //dummy in memory store
 
@@ -122,6 +122,17 @@ http.listen(4001, () => {
     console.log(`Listening on http port 4000`);
 });
 
+
+
+
+app.set('port', process.env.PORT || 8080);
+
+const server = app.listen(app.get('port'), () => {
+    console.log(`Express running → PORT ${server.address().port}`);
+});
+
+const io = socketIo(server)
+
 io.on("connection", function(socket) {
     // This event will trigger when any user is connected.
     // You can use 'socket' to emit and receive events.
@@ -129,12 +140,6 @@ io.on("connection", function(socket) {
 });
 //**************************************//
 
-
-
-app.set('port', process.env.PORT || 8080);
-const server = app.listen(app.get('port'), () => {
-    console.log(`Express running → PORT ${server.address().port}`);
-});
 
 // mongoose.connect(
 //   "mongodb://localhost:27017/mydb",
