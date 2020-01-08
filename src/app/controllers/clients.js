@@ -199,7 +199,24 @@ router.get("/all", function(req, res) {
         });
 });
 
-//*********************GET ALL AGENTS*********************
+//*********************GET ALL USERs statistique*********************
+router.get("/userAll-statistcs", function(req, res) {
+    alluserStats={
+        agent:0,
+        client:0,
+        allusers:0
+    }
+    User.find()
+    .then(data=>{
+        (data).forEach(element => {
+            if(element.role==="agent") alluserStats.agent+=1
+            if(element.role==="client") alluserStats.client+=1
+        });
+        alluserStats.allusers = alluserStats.agent + alluserStats.client
+        res.send(alluserStats);
+    })       
+    });
+
 //********************************Get user by id*************
 router.get("/userId", function(req, res) {
     User.findOne(req.params.id, (err, data) => {

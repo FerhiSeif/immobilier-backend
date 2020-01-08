@@ -116,4 +116,28 @@ router.post("/sendEmail", function(req, res) {
     }
   });
 });
+
+  //demande Achat (confirme, attente, non confirme)
+  router.get("/demandeAchat-statistique", function(req, res) {
+    let stats={
+        nonConfirme:0,
+        confirme:0,
+        enAttente:0,
+        allDemAchat:0,
+    }
+    DemandeAchat.find()
+        .then(demandeAchat => {
+            (demandeAchat).forEach(element => {
+                if(element.status==="confirme") stats.confirme+=1
+                if(element.status==="non confirme") stats.nonConfirme+=1
+                if(element.status==="en attente") stats.enAttente+=1
+            });
+            stats.allDemAchat=demandeAchat.length
+            res.send(stats);
+        })
+        .catch(err => {
+            //console.log(err);
+            res.json(err);
+        });
+});
 module.exports = router;

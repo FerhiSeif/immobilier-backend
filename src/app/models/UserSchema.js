@@ -76,7 +76,11 @@ type: String
         type: mongoose.Schema.Types.ObjectId,
         ref: "BienImmobilier"
       }
-    ]
+    ],
+    numbAnnonces :{
+      type: Number,
+      default: 0
+    },
   })
 
 UserSchema.pre("save", async function(next){

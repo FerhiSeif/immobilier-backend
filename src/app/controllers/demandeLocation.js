@@ -118,4 +118,27 @@ router.post("/sendEmail", function(req, res) {
   });
 });
 
+  //demande Location (confirme, attente, non confirme)
+  router.get("/demandeLoc-statistique", function(req, res) {
+    let stats={
+        nonConfirme:0,
+        confirme:0,
+        enAttente:0,
+        allDemLoc:0,
+    }
+    DemandeLocation.find()
+        .then(demandeLocation => {
+            (demandeLocation).forEach(element => {
+                if(element.status==="confirme") stats.confirme+=1
+                if(element.status==="non confirme") stats.nonConfirme+=1
+                if(element.status==="en attente") stats.enAttente+=1
+            });
+            stats.allDemLoc=demandeLocation.length
+            res.send(stats);
+        })
+        .catch(err => {
+            //console.log(err);
+            res.json(err);
+        });
+});
 module.exports = router;

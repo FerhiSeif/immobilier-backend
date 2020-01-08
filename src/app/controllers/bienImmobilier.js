@@ -16,6 +16,32 @@ var storage = multer.diskStorage({
 
 var upload = multer({ storage: storage });
 
+//STATISTICS 
+  //annonces (confirme, attente, non confirme)
+router.get("/annonces-statistique", function(req, res) {
+    let stats={
+        nonConfirme:0,
+        confirme:0,
+        enAttente:0,
+        allAnnonces:0
+    }
+    BienImmobilier.find()
+        .then(bienImmobilier => {
+            (bienImmobilier).forEach(element => {
+                if(element.etat==="confirme") stats.confirme+=1
+                if(element.etat==="non confirme") stats.nonConfirme+=1
+                if(element.etat==="en attente") stats.enAttente+=1
+            });
+            stats.allAnnonces=bienImmobilier.length
+            res.send(stats);
+        })
+        .catch(err => {
+            //console.log(err);
+            res.json(err);
+        });
+});
+
+
 router.post("/add", upload.any(), authMiddleware, async (req, res) => {
     var fileinfo = req.files;
     var title = req.body.title;
@@ -63,6 +89,8 @@ router.post("/add", upload.any(), authMiddleware, async (req, res) => {
         .catch(err => {
             res.json(err);
         });
+
+        
 });
 
 router.get("/all", function(req, res) {
