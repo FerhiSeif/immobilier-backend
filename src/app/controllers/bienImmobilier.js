@@ -80,6 +80,8 @@ router.post("/add", upload.any(), authMiddleware, async (req, res) => {
         lng: req.body.lng,
         agentId: userRole === "agent" ? req.user._id : req.body.agentId
     });
+    let useragent = await User.findOne({ _id: bienImmobilier.agentId});
+     await User.findByIdAndUpdate(bienImmobilier.agentId, { files: fileinfo, numbAnnonces:useragent.numbAnnonces+1 });
 
     bienImmobilier
         .save()

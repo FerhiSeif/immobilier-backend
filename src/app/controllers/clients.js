@@ -133,7 +133,8 @@ router.post("/login", (req, res) => {
                     "description",
                     "socialMedia",
                     "favoris",
-                    "mission"
+                    "mission",
+                    "numbAnnonces",
                 ]),
                 token: token
             });
@@ -204,18 +205,43 @@ router.get("/userAll-statistcs", function(req, res) {
     alluserStats={
         agent:0,
         client:0,
-        allusers:0
+        allusers:0,
+        annocesperagent:[]
     }
     User.find()
     .then(data=>{
         (data).forEach(element => {
-            if(element.role==="agent") alluserStats.agent+=1
+            if(element.role==="agent") {
+                alluserStats.agent+=1
+                alluserStats.annocesperagent.push({
+                    agent:element.nom + ' ' + element.prenom,
+                    annonces: element.numbAnnonces
+                })
+            }
             if(element.role==="client") alluserStats.client+=1
         });
         alluserStats.allusers = alluserStats.agent + alluserStats.client
         res.send(alluserStats);
     })       
     });
+
+    //*********************GET ALL Agents per annonces statistique*********************
+    router.get("/agents-per-statistcs", function(req, res) {
+        alluserStats={
+            agent:0,
+            client:0,
+            allusers:0
+        }
+        User.find()
+        .then(data=>{
+            (data).forEach(element => {
+                if(element.role==="agent") alluserStats.agent+=1
+                if(element.role==="client") alluserStats.client+=1
+            });
+            alluserStats.allusers = alluserStats.agent + alluserStats.client
+            res.send(alluserStats);
+        })       
+        });
 
 //********************************Get user by id*************
 router.get("/userId", function(req, res) {
@@ -398,7 +424,19 @@ function ensureAuthenticated(req, res, next) {
     req.session.error = "Please sign in!";
     res.redirect("/login");
 }
+//profile by Id
 
+router.get("/myprofile/:id", async (req, res) => {
+    try {
+        let user = await User.findOne({ _id: req.params.id });
+  
+      res.send(user);
+    } catch (err) {
+      res.status(400).send("fetching profile user failed" + err.message);
+    }
+  });
+
+//
 router.get("/profile", authMiddleware, (req, res) => {
     let response = _.pick(req.user, [
         "_id",
@@ -411,7 +449,8 @@ router.get("/profile", authMiddleware, (req, res) => {
         "description",
         "socialMedia",
         "favoris",
-        "role"
+        "role",
+        "numbAnnonces"
     ]);
 
     res.send(response);
